@@ -2,6 +2,7 @@
   "name": "grassgodz-support-widget",
   "version": "1.0.0",
   "description": "Grassgodz AI support chat widget",
+  "type": "module",
   "engines": {
     "node": "24.x"
   }
