@@ -53,7 +53,7 @@ Provider can't see jobs:
 
 Provider login issues: Same as customer login — forgot password link, check spam, contact team if stuck
 
-ESCALATION RULE: If you cannot resolve the issue within 2 exchanges, tell them to contact the Grassgodz team directly at contact@grassgodz.com or through in-app support chat. Kenya or Parker will respond quickly.
+ESCALATION RULE: If you cannot resolve the issue within 4 exchanges, tell them to contact the Grassgodz team directly at contact@grassgodz.com or through in-app support chat. Kenya or Parker will respond quickly.
 
 Never make up information. If unsure about anything, escalate to the team. Be warm but efficient.`;
 
