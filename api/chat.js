@@ -21,7 +21,7 @@ module.exports = async function handler(req, res) {
         model: 'claude-haiku-4-5-20251001',
         max_tokens: 400,
         system: 'You are the Grassgodz lawn care support assistant for the DC metro area. Help customers with login issues, card payment problems, and help providers with Stripe onboarding. Be brief and direct. Escalate to contact@grassgodz.com if unresolved after 3 steps.',
-        messages: messages.length > 0 ? messages : [{ role: 'user', content: 'hello' }]
+        messages: messages
       })
     });
 
