@@ -148,11 +148,13 @@
     addMsg('bot', '__typing__');
 
     try {
-      var res = await fetch(API_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: messages })
-      });
+      var payload = { messages: messages };
+console.log('Sending payload:', JSON.stringify(payload));
+var res = await fetch(API_URL, {
+  method: 'POST',
+  headers: { 'Content-Type': 'application/json' },
+  body: JSON.stringify(payload)
+});
 
       var data = await res.json();
       var reply = data.reply || 'Something went wrong. Please email contact@grassgodz.com and we\'ll help right away.';
