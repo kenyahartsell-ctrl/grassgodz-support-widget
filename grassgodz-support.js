@@ -161,7 +161,7 @@
       addMsg('bot', reply);
       messages.push({ role: 'assistant', content: reply });
 
-      if (exchangeCount >= 6) showEscalate();
+      if (exchangeCount >= 8) showEscalate();
 
     } catch (e) {
       removeTyping();
