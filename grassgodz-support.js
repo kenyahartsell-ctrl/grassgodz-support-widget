@@ -1,7 +1,7 @@
 (function () {
   if (document.getElementById('gg-support-widget')) return;
 
-  var API_URL = 'https://YOUR-VERCEL-APP.vercel.app/api/chat';
+  var API_URL ='https://grassgodz-support-widget.vercel.app/api/chat';
 
   var styles = `
     #gg-support-widget * { box-sizing: border-box; margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
