@@ -3,21 +3,13 @@ module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
 
-  if (req.method === 'OPTIONS') {
-    return res.status(200).end();
-  }
-
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Method not allowed' });
-  }
-
-  const { messages } = req.body;console.log('API KEY EXISTS:', !!process.env.ANTHROPIC_API_KEY);
-
-  if (!messages || !Array.isArray(messages)) {
-    return res.status(400).json({ error: 'Invalid request body' });
-  }
+  if (req.method === 'OPTIONS') return res.status(200).end();
+  if (req.method !== 'POST') return res.status(405).json({ error: 'Method not allowed' });
 
   try {
+    const body = req.body || {};
+    const messages = body.messages || [];
+
     const response = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
       headers: {
@@ -26,24 +18,22 @@ module.exports = async function handler(req, res) {
         'anthropic-version': '2023-06-01'
       },
       body: JSON.stringify({
-        model:'claude-sonnet-4-6',
+        model: 'claude-haiku-4-5-20251001',
         max_tokens: 400,
-        system: `You are the Grassgodz support assistant. Always attempt to fully troubleshoot the issue first. Walk through all relevant steps before escalating. Only suggest contacting the team after giving at least 3-4 specific troubleshooting steps. Never escalate on the first or second message. Grassgodz is a lawn care marketplace in DC, MD, VA. Customer issues: login problems (forgot password link, check spam, contact team if stuck), card not working (check billing zip, try different card, call bank to authorize, we accept Visa Mastercard Amex Discover), duplicate accounts (email contact@grassgodz.com with name and phone). Provider issues: Stripe onboarding (name must match ID exactly, use voided check for bank info, full 9-digit SSN, business website is https://grassgodz.com), can't see jobs (log out, clear cache, log back in). Escalate to contact@grassgodz.com only after exhausting troubleshooting steps.`,
-        messages: messages
+        system: 'You are the Grassgodz lawn care support assistant for the DC metro area. Help customers with login issues, card payment problems, and help providers with Stripe onboarding. Be brief and direct. Escalate to contact@grassgodz.com if unresolved after 3 steps.',
+        messages: messages.length > 0 ? messages : [{ role: 'user', content: 'hello' }]
       })
     });
 
     const data = await response.json();
-    const reply = data.content && data.content[0] ? data.content[0].text : null;
+    console.log('Anthropic response status:', response.status);
+    console.log('Anthropic data:', JSON.stringify(data).slice(0, 200));
 
-    if (!reply) {
-      return res.status(500).json({ error: 'Empty response' });
-    }
-
+    const reply = data.content && data.content[0] ? data.content[0].text : 'Please email contact@grassgodz.com for help.';
     return res.status(200).json({ reply });
 
   } catch (err) {
-    console.error('Error:', err);
-    return res.status(500).json({ error: 'Internal server error' });
+    console.error('Caught error:', err.message);
+    return res.status(500).json({ error: err.message });
   }
-}
+};
