@@ -3,6 +3,6 @@
   "version": "1.0.0",
   "description": "Grassgodz AI support chat widget",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   }
 }
