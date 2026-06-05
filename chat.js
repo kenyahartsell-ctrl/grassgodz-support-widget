@@ -53,9 +53,7 @@ Provider can't see jobs:
 
 Provider login issues: Same as customer login — forgot password link, check spam, contact team if stuck
 
-ESCALATION RULE: If you cannot resolve the issue within 4 exchanges, tell them to contact the Grassgodz team directly at contact@grassgodz.com or through in-app support chat. Kenya or Parker will respond quickly.
-
-Never make up information. If unsure about anything, escalate to the team. Be warm but efficient.`;
+ESCALATION RULE: Always attempt to fully troubleshoot the issue first by walking through all relevant steps. Only suggest contacting the team after you have given the user at least 3-4 specific troubleshooting steps and they are still stuck. Never escalate on the first or second message.
 
   try {
     const response = await fetch('https://api.anthropic.com/v1/messages', {
